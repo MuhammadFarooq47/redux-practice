@@ -5,12 +5,16 @@ import './App.css';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navigation from "./navigation/navigation";
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import {store, persistor} from "./redux/store"
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor} > 
         <ToastContainer
             theme="dark"
             position="bottom-left"
@@ -18,7 +22,8 @@ function App() {
             pauseOnHover={false}
           />
           <Navigation />
-    </>
+          </PersistGate>
+    </Provider>
   )
 }
 

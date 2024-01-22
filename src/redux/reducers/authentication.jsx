@@ -7,5 +7,22 @@ isAuthenticated: false
 }
 
 const authReducer = (state = initial_state, action) => {
-
+    console.log("🚀 ~ authReducer ~ action:", action)
+switch (action.type) {
+    case ActionTypes.SIGNUP:
+        return{
+           ...state,
+           user: action.payload.data,
+           isAuthenticated: true
+        }
+        case ActionTypes.LOGIN: 
+        return{
+            user: action?.payload?.user,
+            isAuthenticated: true
+        }
+        default:
+        return state
 }
+}
+
+export default authReducer;

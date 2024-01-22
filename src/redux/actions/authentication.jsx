@@ -2,11 +2,12 @@ import axios from "axios";
 import {POST, GET} from "../../apis/requests";
 import { toast } from "react-toastify";
 import ActionTypes from "../actionTypes/actionTypes";
+import Cookies from "js-cookie";
 
-const Signup =  (credentials, setLoading, navigate) => {
+const REGISTER =  (credentials, setLoading, navigate) => {
     return async (dispatch) => {
         try {
-            const response = await POST('/users/signup', credentials);
+            const response = await POST('users/signup', credentials);
             toast.success("Register Successfull");
             navigate("/Login")
             dispatch({
@@ -14,7 +15,7 @@ const Signup =  (credentials, setLoading, navigate) => {
                 payload: response?.data
             })
         } catch (error) {
-            toast.error("Errro from Register");
+            toast.error("Register Error!");
             console.log(error);
         }
     }
@@ -22,10 +23,13 @@ const Signup =  (credentials, setLoading, navigate) => {
 };
 
 
-const Login = (credentials, navigate) => {
+const LOGIN = (credentials, navigate) => {
+    console.log("🚀 ~ LOGIN ~ credentials:", credentials)
     return async (dispatch) => {
         try {
-            const response = await POST('/users/login', credentials);
+            const response = await POST('users/login', credentials);
+            Cookies.set('token', response?.data?.token)
+            console.log("🚀 ~ return ~ response:", response)
             toast.success("Login Successfull...");
             navigate('/');
             dispatch({
@@ -33,8 +37,10 @@ const Login = (credentials, navigate) => {
                 payload: response?.data
             })
         } catch (error) {
-            toast.error("Error from login!")
+            toast.error("Login Error!")
             console.log(error);
         }
     }
 }
+
+export {REGISTER, LOGIN}

@@ -3,15 +3,22 @@ import { BASE_URL } from "./apiUrl";
 
 // POST REQUEST
 const POST = async (path, data) => {
-const HEADER = {
-headers: {
-    "Content-Type": "application/json",
-    // Authorization: `Bearer ${localStorage.getItem("token")}`,
-}
+    const headers = {
+        headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+    };
+
+    try {
+        const response = await axios.post(BASE_URL + path, data, headers);
+        return response?.data;
+    } catch (error) {
+        console.error("POST request error:", error);
+        throw error; // Rethrow the error to be caught in the LOGIN action
+    }
 };
-let respnse = await axios.post(BASE_URL + path + data + HEADER);
-return respnse?.data;
-};
+
 
 
 // GET REQUEST
