@@ -3,7 +3,8 @@ import ActionTypes from "../actionTypes/actionTypes";
 
 const initial_state = {
 user: {},
-isAuthenticated: false
+isAuthenticated: false,
+logoutMsg: "",
 }
 
 const authReducer = (state = initial_state, action) => {
@@ -19,6 +20,11 @@ switch (action.type) {
         return{
             user: action?.payload?.user,
             isAuthenticated: true
+        }
+        case ActionTypes.LOGOUT: 
+        return{
+            isAuthenticated: false,
+            logoutMsg: action.payload
         }
         default:
         return state

@@ -43,4 +43,20 @@ const LOGIN = (credentials, navigate) => {
     }
 }
 
-export {REGISTER, LOGIN}
+const LOGOUT = (navigate) => {
+   return (dispatch) => {
+    try {
+        localStorage.removeItem("persist:root");
+        toast.success("User Logout Successfully...");
+        navigate("/login");
+        dispatch({
+            type: ActionTypes.LOGOUT,
+            payload: "User Logout Please Login again!"
+        })
+       } catch (error) {
+        toast.error("Logout Error!");
+       }
+   }
+}
+
+export {REGISTER, LOGIN, LOGOUT}

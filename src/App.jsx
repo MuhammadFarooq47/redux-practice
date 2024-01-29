@@ -7,7 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navigation from "./navigation/navigation";
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import {store, persistor} from "./redux/store"
+import {store, persistor} from "./redux/store";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
 
 function App() {
   const [count, setCount] = useState(0)
