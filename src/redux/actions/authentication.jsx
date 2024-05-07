@@ -15,7 +15,7 @@ const REGISTER =  (credentials, setLoading, navigate) => {
                 payload: response?.data
             })
         } catch (error) {
-            toast.error("Register Error!");
+            toast.error(error?.response?.data?.message);
             console.log(error);
         }
     }

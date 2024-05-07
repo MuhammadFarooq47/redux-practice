@@ -42,6 +42,7 @@ function Login() {
                         name="email"
                         value={login.email}
                         onChange={onChange}
+                        style={{color: '#000'}}
                     />
                 </div>
 
@@ -54,10 +55,11 @@ function Login() {
                         name="password"
                         value={login.password}
                         onChange={onChange}
+                        style={{color: '#000'}}
                     />
                 </div>
 
-                <button type="submit">Register</button>
+                <button type="submit" style={{color: '#000'}}>Login</button>
             </form>
         </div>
     )

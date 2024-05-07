@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "./apiUrl";
+import Cookies from "js-cookie";
 
 // POST REQUEST
 const POST = async (path, data) => {
@@ -26,7 +27,7 @@ const GET = async (path, data) => {
 const HEADER = {
     headers: {
         "Content-Type": "application/json",
-        // Authorization: `Bearer ${localStorage.getItem("token")}`, 
+        Authorization: `Bearer ${Cookies.get("token")}`, 
     }
 };
 let response = await axios.get(BASE_URL + path + data + HEADER)

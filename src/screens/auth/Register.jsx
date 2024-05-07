@@ -23,6 +23,14 @@ function FormExample() {
     confirm: "",
     role: "user",
   });
+  // console.log("🚀 ~ FormExample ~ user:", user);
+
+  const onChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const schema = yup.object().shape({
     firstName: yup.string().required(),
@@ -36,16 +44,12 @@ function FormExample() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const onChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
-  };
 
 
-  const onsubmit = async (e) => {
+
+  const onSubmit = async (e) => {
     e.preventDefault();
+    console.log("🚀 ~ FormExample Line No. 52 ~ user:", user);
     if (user?.password.length < 6 || user?.password !== user?.confirm) {
         toast.error("Password must be at least 6 characters or match the confirmation.")
         return; // Add this to prevent further execution if there's an error
@@ -94,15 +98,15 @@ function FormExample() {
       }}
     >
       {({ handleSubmit, handleChange, values, touched, errors }) => (
-        <Form noValidate onSubmit={handleSubmit}>
+        <Form noValidate onSubmit={onSubmit}>
           <Row className="mb-3">
             <Form.Group as={Col} md="4" controlId="validationFormik01">
               <Form.Label>First name</Form.Label>
               <Form.Control
                 type="text"
                 name="firstName"
-                value={values.firstName}
-                onChange={handleChange}
+                value={user?.firstName}
+                onChange={onChange}
                 isValid={touched.firstName && !errors.firstName}
               />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -112,8 +116,8 @@ function FormExample() {
               <Form.Control
                 type="text"
                 name="lastName"
-                value={values.lastName}
-                onChange={handleChange}
+                value={user?.lastName}
+                onChange={onChange}
                 isValid={touched.lastName && !errors.lastName}
               />
 
@@ -125,11 +129,11 @@ function FormExample() {
                 <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                 <Form.Control
                   type="email"
-                  placeholder="Username"
+                  placeholder="Email"
                   aria-describedby="inputGroupPrepend"
-                  name="username"
-                  value={values.username}
-                  onChange={handleChange}
+                  name="email"
+                  value={user?.email}
+                  onChange={onChange}
                   isInvalid={!!errors.username}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -140,13 +144,13 @@ function FormExample() {
           </Row>
           <Row className="mb-3">
             <Form.Group as={Col} md="6" controlId="validationFormik03">
-              <Form.Label>City</Form.Label>
+              <Form.Label>Phone</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="City"
-                name="city"
-                value={values.city}
-                onChange={handleChange}
+                placeholder="Phone"
+                name="phoneNumber"
+                value={user?.phoneNumber}
+                onChange={onChange}
                 isInvalid={!!errors.city}
               />
 
@@ -155,13 +159,13 @@ function FormExample() {
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="3" controlId="validationFormik04">
-              <Form.Label>State</Form.Label>
+              <Form.Label>Password</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="State"
-                name="state"
-                value={values.state}
-                onChange={handleChange}
+                type="password"
+                placeholder="password"
+                name="password"
+                value={user?.password}
+                onChange={onChange}
                 isInvalid={!!errors.state}
               />
               <Form.Control.Feedback type="invalid">
@@ -169,13 +173,13 @@ function FormExample() {
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="3" controlId="validationFormik05">
-              <Form.Label>Zip</Form.Label>
+              <Form.Label>Confirm Password</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Zip"
-                name="zip"
-                value={values.zip}
-                onChange={handleChange}
+                type="password"
+                placeholder="Confirm"
+                name="confirm"
+                value={user?.confirm}
+                onChange={onChange}
                 isInvalid={!!errors.zip}
               />
 
@@ -189,14 +193,14 @@ function FormExample() {
               required
               name="terms"
               label="Agree to terms and conditions"
-              onChange={handleChange}
+              onChange={onChange}
               isInvalid={!!errors.terms}
               feedback={errors.terms}
               feedbackType="invalid"
               id="validationFormik0"
             />
           </Form.Group>
-          <Button type="submit">Submit form</Button>
+          <Button type="submit">Register</Button>
         </Form>
       )}
     </Formik>
